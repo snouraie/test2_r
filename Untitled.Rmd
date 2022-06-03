@@ -16,7 +16,23 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
-library(base)
+install.packages("rspiro")
+library(rspiro)
+data<-PFT_GLI
+data$prefevpp<-pctpred_GLI(age=data$age_yrs,height=data$height,gender=data$gender,ethnicity=data$race,FEV1=data$pre_fev1)
+View(data)
+data$postfevpp<-pctpred_GLI(age=data$age_yrs,height=data$height,gender=data$gender,ethnicity=data$race,FEV1=data$post_fev1)
+
+data$prefvcpp<-pctpred_GLI(age=data$age_yrs,height=data$height,gender=data$gender,ethnicity=data$race,FVC = data$pre_fvc)
+data$postfvcpp<-pctpred_GLI(age=data$age_yrs,height=data$height,gender=data$gender,ethnicity=data$race,FVC =data$post_fvc)
+
+data$prefevfvcpp<-pctpred_GLI(age=data$age_yrs,height=data$height,gender=data$gender,ethnicity=data$race,FEV1FVC =data$pre_fev1fvc)
+data$postfevfvcpp<-pctpred_GLI(age=data$age_yrs,height=data$height,gender=data$gender,ethnicity=data$race,FEV1FVC =data$post_fev1fvc)
+data$prefef25pp<-pctpred_GLI(age=data$age_yrs,height=data$height,gender=data$gender,ethnicity=data$race,FEF2575 =data$pre_fef25)
+data$postfef25pp<-pctpred_GLI(age=data$age_yrs,height=data$height,gender=data$gender,ethnicity=data$race,FEF2575 =data$post_fef25)
+library(haven)
+write.dta(data,"IPF.dta")
+write_dta(data,"IPF.dta")
 ```
 
 ## Including Plots
